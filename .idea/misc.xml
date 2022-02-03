@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/compose-model-1643792363919.xml" value="0.67" />
+        <entry key="../../../../layout/compose-model-1643802454132.xml" value="0.22" />
+        <entry key="../../../../layout/compose-model-1643805918178.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1643820833660.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1643821973764.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1643824667875.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/search_drawable_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/search_icon.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="dagger.hilt.android.qualifiers.ApplicationContext" />
+    </list>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
