@@ -74,4 +74,6 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation "com.github.skydoves:landscapist-glide:1.4.5"
     implementation "com.google.accompanist:accompanist-flowlayout:0.24.1-alpha"
+    implementation 'androidx.compose.runtime:runtime-livedata:1.2.0-alpha02'
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
 }

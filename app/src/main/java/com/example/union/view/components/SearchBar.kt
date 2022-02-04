@@ -13,10 +13,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import com.example.union.R
+import com.example.union.viewModel.ChatViewModel
 
 @Composable
-fun SearchBar() {
+fun SearchBar(viewModel: ViewModel? = null) {
     var text by remember {
         mutableStateOf("")
     }
@@ -24,18 +26,23 @@ fun SearchBar() {
 
         TextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = {
+                text = it
+                if (viewModel is ChatViewModel) {
+                    viewModel.searchFriendChat(it)
+                }
+            },
             placeholder = { Text(text = "Search friend") },
-
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, Color.Black, RoundedCornerShape(25.dp)),
+                .border(1.dp, Color.Gray, RoundedCornerShape(25.dp)),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.White,
                 cursorColor = Color.Gray,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
+            maxLines = 1,
             leadingIcon = {
                 Row() {
                     Spacer(modifier = Modifier.width(8.dp))
@@ -56,7 +63,6 @@ fun SearchBar() {
                         )
                     }
                 }
-
             }
         )
     }

@@ -24,7 +24,7 @@ class ChatViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow<ChatUiState>(ChatUiState.Empty)
     val uiState: StateFlow<ChatUiState> = _uiState
-    var _chatlist : List<FriendsList> = listOf()
+    private var _chatlist : List<FriendsList> = listOf()
     private val _showingChatList = MutableLiveData<MutableList<FriendsList>>()
     val showingChatList get() = _showingChatList
 
@@ -40,6 +40,10 @@ class ChatViewModel @Inject constructor(
                 val response = chatRepository.getAllChat()
                 _uiState.value = ChatUiState.Loaded(data = response)
                 _chatlist = response.FriendList
+                withContext(coroutineDispatcherProvider.Main()){
+                    searchFriendChat()
+                }
+
             } catch (e: Exception) {
                 if (e is HttpException && e.code() == 429) {
                     withContext(coroutineDispatcherProvider.Main()) {
@@ -55,15 +59,13 @@ class ChatViewModel @Inject constructor(
     }
 
 
-    fun searchFriendChat(query: String): LiveData<MutableList<FriendsList>> {
-        _showingChatList.value?.clear()
-        for (item in _chatlist){
-            if (item.Name.contains(query)){
-                _showingChatList.value?.add(item)
-            }
-        }
+    fun searchFriendChat(query: String = ""): LiveData<MutableList<FriendsList>> {
         if (query.isEmpty()){
-            _showingChatList.value = _chatlist as MutableList<FriendsList>
+            if (_chatlist.isNotEmpty()){
+                _showingChatList.value = _chatlist as MutableList<FriendsList>
+            }
+        }else {
+           _showingChatList.value = _chatlist.filter { friendsList -> friendsList.Name.contains(query) } as MutableList<FriendsList>
         }
         return _showingChatList
     }
@@ -71,11 +73,11 @@ class ChatViewModel @Inject constructor(
 
     private fun onQueryException(e: Exception) {
 
-        _uiState.value = ChatViewModel.ChatUiState.Error(message = e.message.toString())
+        _uiState.value = ChatUiState.Error(message = e.message.toString())
     }
 
     private fun onQueryLimitReached(e: HttpException) {
-        _uiState.value = ChatViewModel.ChatUiState.Error(message = e.message.toString())
+        _uiState.value = ChatUiState.Error(message = e.message.toString())
     }
 
     sealed class ChatUiState() {

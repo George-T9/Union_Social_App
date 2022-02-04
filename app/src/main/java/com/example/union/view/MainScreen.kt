@@ -52,7 +52,7 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel = hiltView
 }
 
 @Composable
-fun MainUI(data: PostModel,navController: NavController) {
+private fun MainUI(data: PostModel,navController: NavController) {
     LazyColumn(Modifier.fillMaxSize()){
         item{
             Spacer(modifier = Modifier.height(16.dp))
