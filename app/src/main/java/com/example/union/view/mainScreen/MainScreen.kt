@@ -1,5 +1,8 @@
 package com.example.union.view.mainScreen
 
+import android.util.Log
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -36,18 +39,23 @@ import com.example.union.view.mainScreen.components.FriendListItem
 
 @Composable
 fun MainScreen(navController: NavController, viewModel: MainViewModel = hiltViewModel()) {
-    when (val state = viewModel.mainUiState.collectAsState().value) {
 
+
+    when (val state = viewModel.mainUiState.collectAsState().value) {
         MainViewModel.MainUiState.Empty -> {}
         is MainViewModel.MainUiState.Error -> {}
-        is MainViewModel.MainUiState.Loaded -> MainUI(
-            userData = state.userData,
-            navController = navController,
-            viewModel = viewModel
-        )
-        MainViewModel.MainUiState.Loading -> CircularProgressBar()
+        is MainViewModel.MainUiState.Loaded ->
+            MainUI(
+                userData = state.userData,
+                navController = navController,
+                viewModel = viewModel
+            )
+        MainViewModel.MainUiState.Loading -> {
+            CircularProgressBar()
+        }
     }
 }
+
 
 @Composable
 private fun MainUI(userData: MainModel, navController: NavController, viewModel: MainViewModel) {
@@ -56,13 +64,14 @@ private fun MainUI(userData: MainModel, navController: NavController, viewModel:
     LazyColumn(Modifier.fillMaxSize()) {
         item {
             Spacer(modifier = Modifier.height(16.dp))
+
             ProfileDetails(navController = navController, data = userData)
             Box(Modifier.padding(16.dp)) {
                 SearchBar()
             }
             GenerateFriendList(userData.FriendList)
         }
-        items(posts){ item->
+        items(posts) { item ->
             Box(Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
                 item?.let {
                     PostListItem(item = it)
@@ -74,6 +83,7 @@ private fun MainUI(userData: MainModel, navController: NavController, viewModel:
 
 @Composable
 fun ProfileDetails(navController: NavController, data: MainModel) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()

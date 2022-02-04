@@ -1,13 +1,14 @@
 package com.example.union.view.mainScreen.components
 
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,6 +21,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun PostListItem(item: PostList) {
+
     Card(
         shape = RoundedCornerShape(14.dp),
         modifier = Modifier.padding(top = 16.dp),

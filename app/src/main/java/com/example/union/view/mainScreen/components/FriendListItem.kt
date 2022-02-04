@@ -8,8 +8,8 @@ import androidx.compose.ui.unit.dp
 import com.example.union.view.globalComponents.CircularImage
 
 @Composable
-fun FriendListItem(image: String) {
+fun FriendListItem(image: String?) {
     Surface(modifier = Modifier.padding(start = 10.dp)) {
-        CircularImage(image = image, border = 2)
+        CircularImage(image = image, border = 2,)
     }
 }

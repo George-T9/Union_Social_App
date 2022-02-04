@@ -22,6 +22,7 @@ import com.example.union.view.globalComponents.CircularImage
 import com.example.union.view.globalComponents.CircularProgressBar
 import com.example.union.view.globalComponents.SearchBar
 import com.example.union.view.chatScreen.ChatViewModel
+import com.example.union.view.chatScreen.components.ChatListItem
 
 @Composable
 fun ChatScreen(navController: NavController, chatViewModel: ChatViewModel = hiltViewModel()) {
@@ -85,20 +86,4 @@ fun ChatToolbar(navController: NavController, viewModel: ChatViewModel) {
     }
 }
 
-@Composable
-fun ChatListItem(item: FriendsList) {
-    Row(
-        Modifier
-            .fillMaxWidth()
-            .padding(top = 10.dp), verticalAlignment = Alignment.CenterVertically
-    ) {
-        CircularImage(image = item.ProfileImage, size = 60)
-        Spacer(modifier = Modifier.width(12.dp))
-        Column {
-            Text(item.Name, style = MaterialTheme.typography.h6)
-            Text(item.LastMessage, style = MaterialTheme.typography.subtitle1, color = Color.Gray)
 
-        }
-
-    }
-}
