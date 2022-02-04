@@ -1,4 +1,4 @@
-package com.example.union.view.components
+package com.example.union.view.globalComponents
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box

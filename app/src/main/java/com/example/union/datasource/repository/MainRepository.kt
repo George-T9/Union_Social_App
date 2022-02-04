@@ -8,5 +8,5 @@ class MainRepository @Inject constructor(private val mainService: MainService, p
 
     suspend fun getMainData() = mainService.getMainData()
 
-    suspend fun getPostData() = postService.getPostsData()
+    suspend fun getPostData(page:Int) = postService.getPostsData(page)
 }

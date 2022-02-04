@@ -1,14 +1,12 @@
 package com.example.union
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.union.view.ChatScreen
-import com.example.union.view.MainScreen
+import com.example.union.view.mainScreen.MainScreen
 import com.example.union.view.ProfileScreen
-import com.example.union.viewModel.MainViewModel
 
 @Composable
 fun SetupNavGraph(

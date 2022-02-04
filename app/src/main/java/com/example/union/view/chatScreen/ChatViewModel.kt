@@ -1,4 +1,4 @@
-package com.example.union.viewModel
+package com.example.union.view.chatScreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

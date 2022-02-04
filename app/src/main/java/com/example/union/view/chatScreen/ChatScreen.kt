@@ -18,10 +18,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.union.model.ChatModel
 import com.example.union.model.FriendsList
-import com.example.union.view.components.CircularImage
-import com.example.union.view.components.CircularProgressBar
-import com.example.union.view.components.SearchBar
-import com.example.union.viewModel.ChatViewModel
+import com.example.union.view.globalComponents.CircularImage
+import com.example.union.view.globalComponents.CircularProgressBar
+import com.example.union.view.globalComponents.SearchBar
+import com.example.union.view.chatScreen.ChatViewModel
 
 @Composable
 fun ChatScreen(navController: NavController, chatViewModel: ChatViewModel = hiltViewModel()) {

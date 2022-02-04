@@ -1,15 +1,20 @@
-package com.example.union.viewModel
+package com.example.union.view.mainScreen
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.*
 import com.example.union.CoroutineDispatcherProvider
+import com.example.union.datasource.PostSource
 import com.example.union.model.MainModel
 import com.example.union.model.PostModel
 import com.example.union.datasource.repository.MainRepository
+import com.example.union.model.PostList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -28,20 +33,23 @@ class MainViewModel @Inject constructor(
     private val _mainUiState = MutableStateFlow<MainUiState>(MainUiState.Empty)
     val mainUiState: StateFlow<MainUiState> get() = _mainUiState
 
-    private val _postUiState = MutableStateFlow<PostUiState>(PostUiState.Empty)
-    val postUiState: StateFlow<PostUiState> get() = _postUiState
-
     init {
         fetchUserDetails()
-        fetchAllPosts()
+    }
+
+    fun getPostPagination() : Flow<PagingData<PostList>> {
+        return Pager(PagingConfig(pageSize = 10)){
+            PostSource(mainRepository = mainRepository)
+        }.flow
     }
 
     private fun fetchUserDetails() {
         _mainUiState.value = MainUiState.Loading
         viewModelScope.launch(coroutineDispatcherProvider.IO()) {
             try {
-                val response = mainRepository.getMainData()
-                _mainUiState.value = MainUiState.Loaded(response)
+                val userResponse = mainRepository.getMainData()
+                _mainUiState.value =
+                    MainUiState.Loaded(userData = userResponse)
             } catch (e: Exception) {
                 if (e is HttpException && e.code() == 429) {
                     withContext(coroutineDispatcherProvider.Main()) {
@@ -51,24 +59,6 @@ class MainViewModel @Inject constructor(
                     withContext(coroutineDispatcherProvider.Main()) {
                         onQueryException(e)
                     }
-                }
-            }
-        }
-    }
-
-    private fun fetchAllPosts(){
-        _postUiState.value = PostUiState.Loading
-        viewModelScope.launch (coroutineDispatcherProvider.IO()){
-            try {
-                val response = mainRepository.getPostData()
-                _postUiState.value = PostUiState.Loaded(response)
-
-
-            }catch (e:Exception){
-                if (e is HttpException && e.code() == 429){
-                    onQueryLimitReached(e)
-                }else{
-                    onQueryException(e)
                 }
             }
         }
@@ -86,14 +76,8 @@ class MainViewModel @Inject constructor(
     sealed class MainUiState() {
         object Empty : MainUiState()
         object Loading : MainUiState()
-        class Loaded(val data: MainModel) : MainUiState()
+        class Loaded(val userData : MainModel) : MainUiState()
         class Error(val message: String) : MainUiState()
     }
-
-    sealed class PostUiState() {
-        object Empty : PostUiState()
-        object Loading : PostUiState()
-        class Loaded(val data: PostModel) : PostUiState()
-        class Error(val message: String) : PostUiState()
-    }
 }
+

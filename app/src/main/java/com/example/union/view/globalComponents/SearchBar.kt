@@ -1,4 +1,4 @@
-package com.example.union.view.components
+package com.example.union.view.globalComponents
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import com.example.union.R
-import com.example.union.viewModel.ChatViewModel
+import com.example.union.view.chatScreen.ChatViewModel
 
 @Composable
 fun SearchBar(viewModel: ViewModel? = null) {

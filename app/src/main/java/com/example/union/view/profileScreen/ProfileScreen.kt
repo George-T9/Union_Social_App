@@ -24,8 +24,8 @@ import com.example.union.R
 import com.example.union.Screen
 import com.example.union.model.PhotoList
 import com.example.union.model.ProfileModel
-import com.example.union.view.components.CircularProgressBar
-import com.example.union.viewModel.ProfileViewModel
+import com.example.union.view.globalComponents.CircularProgressBar
+import com.example.union.view.profileScreen.ProfileViewModel
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
@@ -59,7 +59,6 @@ private fun MainUi(data: ProfileModel, navController: NavController) {
 
 @Composable
 fun ProfileToolBar(data: ProfileModel, navController: NavController) {
-
     Card(
         elevation = 4.dp,
         shape = RoundedCornerShape(bottomStart = 25.dp, bottomEnd = 25.dp),

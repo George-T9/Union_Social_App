@@ -1,4 +1,4 @@
-package com.example.union.viewModel
+package com.example.union.view.profileScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
